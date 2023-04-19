@@ -6,7 +6,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send("Hello Server 🙋🏻‍♀️");
-    console.log('GET /car')
+    console.log('GET')
 })
 
 const port = 3001 ;
