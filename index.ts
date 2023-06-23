@@ -10,7 +10,9 @@ app.get('/', (req, res) => {
     console.log('GET')
 })
 
+
 const port = process.env.PORT;
+
 
 app.listen(port, () =>
     console.log(`server running on port ${port}`)
