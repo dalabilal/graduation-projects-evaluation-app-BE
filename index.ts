@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from "dotenv"
-import { instructors, students } from './routers';
+import { instructorsRouter, quizRouter, studentsRouter } from './routers';
 import mongoose from 'mongoose';
 const app = express();
 dotenv.config();
@@ -15,15 +15,16 @@ mongoose.connect(MONGO_URL)
         console.error('Error connecting to MongoDB:', error);
     });
 
-app.use('/instructors', instructors);
-app.use('/students', students);
+app.use('/instructors', instructorsRouter);
+app.use('/students', studentsRouter);
+app.use('/quiz', quizRouter);
 
 
 
-app.get('/', (req, res) => {
-    res.send("Hello Server 🙋🏻‍♀️");
-    console.log('GET')
-})
+// app.get('/', (req, res) => {
+//     res.send("Hello Server 🙋🏻‍♀️");
+//     console.log('GET')
+// })
 
 const port = 3002;
 
