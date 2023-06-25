@@ -3,10 +3,10 @@ import Student, { IStudent } from '../model/student';
 
 const router = express.Router();
 
-// Get all students
+// GET all students
 router.get('/', async (req, res) => {
   try {
-    const students: IStudent[] = await Student.find();
+    const students = await Student.find();
     res.json(students);
   } catch (error) {
     console.error('Error retrieving students:', error);
@@ -14,19 +14,19 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Create a student
+// POST create a student
 router.post('/', async (req, res) => {
   const { id, name, email, major } = req.body;
 
   try {
-    const student: IStudent = new Student({
+    const student = new Student({
       id,
       name,
       email,
       major,
     });
 
-    const result: IStudent = await student.save();
+    const result = await student.save();
     res.json(result);
   } catch (error) {
     console.error('Error creating student:', error);
@@ -35,8 +35,7 @@ router.post('/', async (req, res) => {
 });
 
 
-
-// Update a student
+// PUT update a student
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { name, email, major } = req.body;
