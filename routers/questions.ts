@@ -1,4 +1,3 @@
-// quiz.router.ts
 import express, { Request, Response } from 'express';
 import Question, { IQuestion } from '../model/questions';
 
@@ -17,7 +16,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 // Create a question
 router.post('/', async (req: Request, res: Response) => {
-  const { id, question, options, type, className, weight } = req.body;
+  const { id, question, options, type, Class, weight } = req.body;
 
   try {
     const newQuestion: IQuestion = new Question({
@@ -25,7 +24,7 @@ router.post('/', async (req: Request, res: Response) => {
       question,
       options,
       type,
-      className,
+      Class,
       weight,
     });
 
@@ -33,6 +32,29 @@ router.post('/', async (req: Request, res: Response) => {
     res.json(result);
   } catch (error) {
     console.error('Error creating question:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Update a question
+router.put('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { question, options, type, Class, weight } = req.body;
+
+  try {
+    const updatedQuestion: IQuestion | null = await Question.findByIdAndUpdate(
+      id,
+      { question, options, type, Class, weight },
+      { new: true }
+    );
+
+    if (!updatedQuestion) {
+      return res.status(404).json({ error: 'Question not found' });
+    }
+
+    res.json(updatedQuestion);
+  } catch (error) {
+    console.error('Error updating question:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

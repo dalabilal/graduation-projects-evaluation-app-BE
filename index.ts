@@ -2,7 +2,9 @@ import express from 'express'
 import dotenv from "dotenv"
 import { instructorsRouter, quizRouter, studentsRouter } from './routers';
 import mongoose from 'mongoose';
+import cors from 'cors';
 const app = express();
+app.use(cors());
 dotenv.config();
 
 app.use(express.json());
@@ -17,14 +19,9 @@ mongoose.connect(MONGO_URL)
 
 app.use('/instructors', instructorsRouter);
 app.use('/students', studentsRouter);
-app.use('/quiz', quizRouter);
+app.use('/questions', quizRouter);
+// app.use('/users', userRouter);
 
-
-
-// app.get('/', (req, res) => {
-//     res.send("Hello Server 🙋🏻‍♀️");
-//     console.log('GET')
-// })
 
 const port = 3002;
 

@@ -1,4 +1,3 @@
-// quiz.model.ts
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IQuestion extends Document {
@@ -6,7 +5,7 @@ export interface IQuestion extends Document {
   question: string;
   options: string[];
   type: string;
-  class: string;
+  Class: string;
   weight: number;
 }
 
@@ -15,8 +14,9 @@ const QuestionSchema: Schema = new Schema({
   question: { type: String, required: true },
   options: { type: [String], required: true },
   type: { type: String, required: true },
-  class: { type: String, required: true },
+  Class: { type: String, required: true },
   weight: { type: Number, required: true },
 });
 
-export default mongoose.model<IQuestion>('Question', QuestionSchema);
+const Question = mongoose.model<IQuestion>('Question', QuestionSchema);
+ export default Question;
