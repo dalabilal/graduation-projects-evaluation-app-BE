@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from "dotenv"
-import { instructorsRouter, quizRouter, studentsRouter } from './routers';
+import { instructorsRouter, quizRouter, studentsRouter, userRouter } from './routers';
 import mongoose from 'mongoose';
 import cors from 'cors';
 const app = express();
@@ -20,7 +20,7 @@ mongoose.connect(MONGO_URL)
 app.use('/instructors', instructorsRouter);
 app.use('/students', studentsRouter);
 app.use('/questions', quizRouter);
-// app.use('/users', userRouter);
+app.use('/users', userRouter);
 
 
 const port = 3002;
