@@ -6,10 +6,10 @@ const router = express.Router();
 // Create a group
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const { id, groupName, student, instructor ,type } = req.body;
+    const { id, groupName, students, instructor ,type } = req.body;
     console.log(req.body);
     
-    const group: IGroups = await Groups.create({ id, groupName, students : student, instructor , type });
+    const group: IGroups = await Groups.create({ id, groupName, students : students, instructor , type });
     group.save()
   .then(savedGroup => {
     console.log('Group created:', savedGroup);

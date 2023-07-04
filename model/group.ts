@@ -5,7 +5,7 @@ import { IInstructor } from './instructor';
 export interface IGroups extends Document {
     id: string,
     groupName: string,
-    student: IStudent[],
+    students: IStudent[],
     instructor: IInstructor,
     type : string
 }
