@@ -6,14 +6,16 @@ export interface IGroups extends Document {
     id: string,
     groupName: string,
     student: IStudent[],
-    instructor: IInstructor
+    instructor: IInstructor,
+    type : string
 }
 
 const GroupsSchema = new Schema({
     id: { type: String, required: true },
     groupName: { type: String, required: true },
     students: [{ type: Schema.Types.ObjectId, required: false }],
-    instructor: { type: Schema.Types.ObjectId, required: false }
+    instructor: { type: Schema.Types.ObjectId, required: false },
+    type: { type: String, required: true }
   });
   
 
