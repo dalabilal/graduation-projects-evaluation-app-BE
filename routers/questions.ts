@@ -16,7 +16,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 // Create a question
 router.post('/', async (req: Request, res: Response) => {
-  const { id, question, options, type, Class, weight } = req.body;
+  const { id, question, options, type, Class, weight, marks } = req.body;
 
   try {
     const newQuestion: IQuestion = new Question({
@@ -26,6 +26,7 @@ router.post('/', async (req: Request, res: Response) => {
       type,
       Class,
       weight,
+      marks, // Include the 'marks' field
     });
 
     const result: IQuestion = await newQuestion.save();
@@ -35,6 +36,7 @@ router.post('/', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 // Update a question
 router.put('/:id', async (req: Request, res: Response) => {
