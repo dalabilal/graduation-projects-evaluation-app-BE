@@ -1,29 +1,38 @@
-// users.js
+import { Router, Request, Response } from 'express';
+import User from '../model/user';
+import mongoose from 'mongoose';
 
-import User from "../model/user";
+const router = Router();
 
-const express = require('express');
-const router = express.Router();
 
-router.get('/', async (req:any, res:any) => {
-    try {
-      const users = await User.find();
-      res.status(200).json(users);
-    } catch (error) {
-      res.status(500).json({ error: 'An error occurred while fetching users.' });
-    }
-  });
-
-// Define the route for creating a new user
-router.post('/', async (req:any, res:any) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
-    const { id, name, email } = req.body;
-    const user = new User({ id, name, email });
-    await user.save();
-    res.status(201).json(user);
+    const users = await User.find();
+
+    return res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred while creating the user.' });
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
+router.post('/', async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email, password: password });
+
+    if (user) {
+      return res.status(200).json({ message: 'User authenticated successfully' });
+    } else {
+      return res.status(401).json({ message: 'Authentication failed' });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 export default router;
