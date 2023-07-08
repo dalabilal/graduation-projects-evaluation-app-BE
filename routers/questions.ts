@@ -24,8 +24,7 @@ router.post('/', async (req: Request, res: Response) => {
       question,
       options,
       type,
-      Class,
-      weight,
+      Class
     });
 
     const result: IQuestion = await newQuestion.save();
