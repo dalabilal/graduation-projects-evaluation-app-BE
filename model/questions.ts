@@ -6,7 +6,6 @@ export interface IQuestion extends Document {
   options: { option: string; weight: number }[];
   type: string;
   Class: string;
-  weight: number;
 }
 
 const QuestionSchema: Schema = new Schema({
@@ -15,7 +14,6 @@ const QuestionSchema: Schema = new Schema({
   options: { type: [{ option: String, weight: Number }], required: true },
   type: { type: String, required: true },
   Class: { type: String, required: true },
-  weight: { type: Number, required: true },
 });
 
 const Question = mongoose.model<IQuestion>('Question', QuestionSchema);
