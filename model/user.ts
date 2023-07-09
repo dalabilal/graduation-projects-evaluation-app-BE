@@ -4,7 +4,6 @@ interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  role?:string
 }
 
 const userSchema = new Schema<IUser>({
@@ -22,10 +21,7 @@ const userSchema = new Schema<IUser>({
     required: true,
   },
 
-  role: {
-    type: String,
-    required: false,
-  },
+ 
 });
 
 const User = model<IUser>('User', userSchema);
